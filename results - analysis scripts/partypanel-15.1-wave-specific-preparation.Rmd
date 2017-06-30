@@ -1,0 +1,6 @@
+
+```{r}
+
+frequencyVars <- c('goingOutFreq', 'substUseFreq', 'otherSubstFreq');
+
+```

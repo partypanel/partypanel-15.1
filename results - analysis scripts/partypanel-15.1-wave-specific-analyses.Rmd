@@ -1,0 +1,115 @@
+
+### Wave specific analyses (PP15.1)
+
+```{r}
+
+doseVars <- c('strngXTC_Definition', 'xtcUseDoseHigh',
+              'xtcUseDosePref', 'myPillDose',
+              'xtcUsePillHigh', 'xtcUsePillPref');
+
+tmpDat <- dat[dat$myPillDose > 0, doseVars];
+
+bp <- ggplot(tmpDat, aes(y=xtcUseDosePref, x=myPillDose)) +
+  theme_bw() +
+  geom_abline(intercept=0, slope=1, color='blue', size=2) +
+  scale_x_continuous(limits=c(0, 300),
+                     breaks=seq(0, 300, 50)) +
+  scale_y_continuous(limits=c(0, 600),
+                     breaks=seq(0, 600, 100)) +
+  xlab("How strong are your pills?") +
+  ylab("What pill dose would you prefer?") +
+  ggtitle("Own pill dose versus preferred pill dose");
+
+ggSave(plot=bp,
+       file.path(workingPath, "Own pills versus preferred dose (1-empty).png"));
+
+bp <- bp + geom_jitter(size=4, width=10, height=10,
+                 alpha=.15, na.rm=TRUE);
+
+ggSave(plot = bp,
+       file.path(workingPath, "Own pills versus preferred dose (2-filled).png"));
+
+bp <- ggplot(tmpDat, aes(y=strngXTC_Definition, x=myPillDose)) +
+  theme_bw() +
+  scale_x_continuous(limits=c(0, 300),
+                     breaks=seq(0, 300, 50)) +
+  scale_y_continuous(limits=c(0, 300),
+                     breaks=seq(0, 300, 50)) +
+  xlab("How strong are your pills?") +
+  ylab("When do you consider a pill 'highly dosed'?") +
+  ggtitle("Own pill dose vs definition of 'high dose'") +
+  geom_abline(intercept=0, slope=1, color='blue', size=2);
+
+ggSave(plot=bp,
+       file.path(workingPath, "Own pills versus definition of high dose (1-empty).png"));
+
+bp <- bp +
+  geom_jitter(size=4, width=10, height=10,
+              alpha=.15, na.rm=TRUE);
+
+ggSave(plot = bp,
+       file.path(workingPath, "Own pills versus definition of high dose (2-filled).png"));
+
+rm(bp);
+rm(tmpDat);
+
+########################################################################
+### Weight and dose
+########################################################################
+
+regr(xtcUseDosePref ~ weight_other, dat);
+
+tmpDat <- na.omit(dat[, c("weight_other", "xtcUseDosePref", "highDose_Tolerance_tolerance")]);
+tmpDat$healthyDoseLo <- tmpDat$weight_other;
+tmpDat$healthyDoseHi <- tmpDat$weight_other * 1.5;
+
+weightDosePlotBase <-
+  ggplot(tmpDat, aes(x=weight_other, y=xtcUseDosePref)) +
+  xlab("Gewicht (in kilo's)") +
+  xlab("Weight (in kilograms)") +
+  ylab("Gewenste dosis (in milligram MDMA)") +
+  ylab("Desired dose (in milligram MDMA)") +
+  ggtitle("Verband tussen gewicht en gewenste dosis MDMA") +
+  ggtitle("Association between weight and desired dose") +
+  coord_cartesian(xlim=c(min(tmpDat$weight_other, na.rm=TRUE),
+                         max(tmpDat$weight_other, na.rm=TRUE)),
+                  ylim=c(0,
+                         max(tmpDat$xtcUseDosePref, na.rm=TRUE))) +
+  theme_bw();
+
+weightDosePlotRecommended <- weightDosePlotBase +
+  geom_ribbon(aes(ymin=healthyDoseLo, ymax=healthyDoseHi), fill='green', alpha=.2) +
+  geom_segment(aes(x=min(tmpDat$weight_other, na.rm=TRUE),
+                   xend=max(tmpDat$weight_other, na.rm=TRUE),
+                   y=min(tmpDat$weight_other, na.rm=TRUE),
+                   yend=max(tmpDat$weight_other, na.rm=TRUE)), color="green", size=1) +
+  geom_segment(aes(x=min(tmpDat$weight_other, na.rm=TRUE),
+                   xend=max(tmpDat$weight_other, na.rm=TRUE),
+                   y=min(tmpDat$weight_other, na.rm=TRUE) * 1.5,
+                   yend=max(tmpDat$weight_other, na.rm=TRUE) * 1.5), color="green", size=1);
+
+weightDosePlotScatter <- weightDosePlotRecommended +
+  geom_point(size=4, stroke=0, alpha=.25);
+
+weightDosePlotScatterTolerance <- weightDosePlotRecommended +
+  geom_point(mapping=aes(color=highDose_Tolerance_tolerance),
+             size=4, stroke=0, alpha=.5) +
+  theme(legend.position = "bottom") +
+  scale_colour_gradientn(colours = colorRampPalette(c("blue", "red"))(7)) +
+  guides(color=guide_legend(title="Self-reported tolerance",
+                            title.position="bottom",
+                            title.hjust=.5, ncol=7));
+
+weightDosePlotFull <- weightDosePlotScatter +
+  stat_smooth(method='lm', fill="blue", alpha=.2);
+weightDosePlotFullTolerance <- weightDosePlotScatterTolerance +
+  stat_smooth(method='lm', fill="blue", alpha=.2);
+
+ggSave(file.path(workingPath, "Weight & dose 1 [empty].png"), weightDosePlotBase);
+ggSave(file.path(workingPath, "Weight & dose 2 [guidelines].png"), weightDosePlotRecommended);
+ggSave(file.path(workingPath, "Weight & dose 3 [scatter].png"), weightDosePlotScatter);
+ggSave(file.path(workingPath, "Weight & dose 4 [regression].png"), weightDosePlotFull);
+ggSave(file.path(workingPath, "Weight & dose 5 [scatter+tolerance].png"), weightDosePlotScatterTolerance);
+ggSave(file.path(workingPath, "Weight & dose 6 [regression+tolerance].png"), weightDosePlotFullTolerance);
+
+```
