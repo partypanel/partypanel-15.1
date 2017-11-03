@@ -1,6 +1,4 @@
 
-### Wave specific analyses (PP15.1)
-
 ```{r}
 
 doseVars <- c('strngXTC_Definition', 'xtcUseDoseHigh',

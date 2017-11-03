@@ -1,0 +1,93 @@
+### Inleiding
+
+Dit rapport is een product van Party Panel. Party Panel is een wetenschappelijke semi-panel studie die tot doel heeft preventie van gezondheidsincidenten in het Nederlandse uitgaansleven te informeren.
+
+Party Panel is opgezet in 2015 als onderdeel van de publiek-private samenwerking Celebrate Safe. Het doel van Celebrate Safe is gezondheidsincidenten in het uitgaansleven te voorkomen. Om dit doel te bereiken werken organisaties uit de private en publieke sector samen. Deze samenwerking behelst bijvoorbeeld coordinatie en wederzijdse ondersteuning bij communicatie over gezondheidsrisico's. Een ander onderdeel van Celebrate Safe betreft juist de inhoud van deze preventieboodschappen. Party Panel is opgezet om deze inhoud op een structurele wijze te voorzien van een basis van evidentie en theorie.
+
+Dit gebeurt op basis van uitganspunten uit de gezondheidspsychologie, in het bijzonder de gedragsveranderingswetenschap. Deze uitgangspunten worden uitgelegd in een aantal artikelen dat beschikbaar is op http://effectivebehaviorchange.com. Heel in het kort komt het op het volgende neer.
+
+Incidenten in het uitgaansleven worden veroorzaakt door gedrag van het uitgaanspubliek en hun omgeving. Het gedrag van het uitgaanspubliek wordt veroorzaakt door psychologische variabelen en de omgeving van het uitgaanspubliek. Voorbeelden van omgevingsfactoren van het uitgaanspubliek zijn vrienden en vriendinnen, personeel uit het uitgaansleven, en faciliteiten in het uitgaansleven. Voorbeelden van psychologische variabelen van het uitgaanspubliek zijn waargenomen voordelen van het gedrag, waargenomen sociale normen, en vaardigheden. Deze psychologische variabelen worden determinanten van gedrag genoemd.
+
+Een noodzakelijke (maar niet voldoende) voorwaarde succesvolle preventie is inzicht in waar het betreffende gedrag nu precies door wordt voorspeld. Dit wordt dan in kaart gebracht voor het gewenste gedrag, zodat een preventieboodschap zich kan richten op het aanmoedigen van dat gedrag. Als bekend is welke determinanten verantwoordelijk zijn voor het betreffende gedrag kan deze informatie worden gebruikt om methoden voor gedragsverandering te selecteren, die dan kunnen worden geïntegreerd in gedragsveranderingsinterventies (e.g. preventieboodschappen). Party Panel is opgezet om dit inzicht in de relevante determinanten te verkrijgen.
+
+Tot slot is het belangrijk om een breed gedragen misverstand over gedragsverandering even expliciet te behandelen. Kennis en bewustwording zijn meestal relatief onbelangrijke determinanten van gedrag. Interventies (of boodschappen/communicaties) die zich alleen richten op bewustwording en kennis hebben weinig kans van slagen. Kennis en bewustwording zijn vaak wel belangrijk voor gedragsverandering; alleen zijn er vaak al veel communicaties die zich daar op richten, en zijn ze praktisch nooit voldoende. Een bijzondere rol wordt ingenomen door risicoperceptie, de inschatting van het risico dat riskant gedrag met zich meebrengt. Niet alleen is dit als vorm van kennis vaak relatief onbelangrijk (in vergelijking met andere determinanten zoals vaardigheden): risicoperceptie is bovendien een riskant interventiedoel. Dit omdat zogenaamde 'dreigende communicatie' een averechts effect kan hebben, en communicatie over de risico's waar iemand aan wordt blootgesteld is vaak dreigend voor de ontvanger.
+
+Succesvolle preventie in het uitgaansleven vereist dus onherroepelijk dat van de betreffende gedragingen in kaart wordt gebracht wat de belangrijkste determinanten zijn. In dit rapport wordt dit besproken voor Party Panel ronde `r ppRound` en de gedragingen `r ppBehaviors`.
+
+### Interventie suggesties
+
+Deze sectie bevat de suggesties voor preventie op basis van de analyse van de determinanten van `r ppBehaviors`.
+
+Het valt op dat de meest frequent gerapporteerde effecten van het gebruiken van een hoge dosis MDMA over het algemeen niet de meest wenselijke effecten zijn. Deelnemers aan Party Panel realiseerden zich dus ergens wel dat het gebruik van een hoge dosis onwenselijke gevolgen had (met betrekking tot de ervaring; het werd duidelijk dat deelnemers zich al realiseerden dat hoge doses gevolgen voor de gezondheid heeft).
+
+Verder werd er een sterk verband geobserveerd tussen of deelnemers het gebruik van een hoge dosis ecstasy een betere ervaring vonden en hun intentie. Dit biedt een ingang voor preventie: wellicht is het mogelijk bij gebruikers reflectie aan te moedigen, waardoor het besef dat hogere doses niet leiden tot een betere ervaring kan worden gerealiseerd. Hierbij is het belangrijk er rekening mee te houden dat sommige mensen effecten van hoge dosering zoals hallucineren *wel* prettig vinden.
+
+Voor de meeste mensen geldt dat het gelukkige gevoel, het primaire effect van ecstasy, toeneemt met dosering totdat de maximale dosering is bereikt Hierna neemt de in zichzelf gekeerdheid juist toe, wat als onprettig wordt ervaren. Bij mensen die een sterker gelukkig gevoel verwachten bij een hogere dosis kan het dus handig zijn dit misverstand te ontkrachten.
+
+Sommige deelnemers geloven dat hoger gedoseerde pillen ook zuiverder zijn. Echter, een pil is zoveel groter dan het kleine aandeel MDMA dat er zelfs met hooggedoseerde pillen nog voldoende gelegenheid is voor vervuiling. Het gebruik van hooggedoseerde pillen is dus niet veiliger.
+
+Een idee voor een interventie is deelnemers te laten aangeven hoe ze denken dat de verschillende effecten van ecstasy veranderen naarmate de dosis hoger wordt. Een voorbeeld van zo'n curve staat hieronder:
+
+```{r ervaringsCurve, fig.width=6, fig.height=4}
+
+require('userfriendlyscience', quietly = TRUE);
+safeRequire('ggplot2');
+safeRequire('grid');
+safeRequire('data.tree');
+safeRequire('DiagrammeR');
+safeRequire('pander');
+safeRequire('knitr');
+
+ggplot(data.frame(x=seq(0, 1, .001),
+                  y=sqrt(dbeta(seq(0, 1, .001), 2, 4))),
+       aes(x=x, y=y)) + geom_line(size=1) +
+  ylab("Kwaliteit van de ervaring") +
+  xlab("Dosis MDMA") +
+  scale_x_continuous(breaks=c(0, .2, .4, .6, .8, 1),
+                     labels=c("0mg", "50mg", "100mg", "150mg", "200mg", "250mg")) +
+  scale_y_continuous(breaks=c(0, .3, .6, .9, 1.2, 1.5),
+                     labels=c("0%", "20%", "40%", "60%", "80%", "100%")) +
+  theme_bw();
+
+```
+
+Bij deze persoon zou de ervaring dus maximaal zijn bij ongeveer 65 milligram. Een dosis van 250 milligram zou ongeveer gelijk staan aan het niet nemen van ecstasy, bijvoorbeeld omdat de negatieve effecten (bijvoorbeeld sociaal isolerend gedrag, hallucinaties, tandenknarsen) zo sterk zijn dat ze de positieve effecten overschaduwen.
+
+Als mensen zelf zo'n 'ervaringscurve' tekenen, dan kan die bijvoorbeeld worden vergeleken met hoe dit in werkelijkheid zit. Hiervoor is die informatie natuurlijk wel nodig - het is ons nu niet bekend of dit ooit in kaart is gebracht. Zelfs zonder de 'echte curves' kan het natuurlijk een zinvolle exercitie zijn om gebruikers hun inschatting van die curves te laten maken.
+
+Het kan dan handig zijn om gebruikers van te voren te laten nadenken over wat de effecten van echt hoge doseringen zijn, zodat het tekenen van de 'effect curves' wordt benaderd vanuit de juiste basis, dus gebaseerd op erkenning van het gegeven dat hoge doses onwenselijke effecten hebben.
+
+De determinant 'anticipated regret', oftewel 'geanticipeerde spijt', hing ook samen met intentie om hooggedoseerde ecstasy te gebruiken. Dat betekent dat als deelnemers bewogen kunnen worden te reflecteren op de negatieve gevolgen van een hoge dosering, dat kan leiden tot gebruik van lagere doses.
+
+Een middel hiervoor kan zijn dat deelnemers aangaven minder te onthouden als een hoge dosis werd gebruikt (terwijl veel onthouden wenselijker was).
+
+De meeste deelnemers gaven aan dat testen anoniem was (wat klopt), dat ze weten waar ze hun ecstasy kunnen laten testen, en dat ze daar relatief eenvoudig konden komen. Dat werd echter wel als vrij tijdrovend beschouwd. Vrij veel deelnemers gaven aan dat testen altijd minimaal een pil kost, terwijl in 50% van de gevallen (70% tijdens ADE) onmiddelijk kan worden bepaald wat er in een pil zit zonder dat deze naar het lab gestuurd hoeft te worden. Deze informatie (dat testen dus maar in de helft van de gevallen een pil kost) kan helpen om testgedrag te bevorderen. Een andere suggesties is meer testlokaties beschikbaar te maken en de procedures te versnellen zodat testen minder tijdrovend wordt.
+
+Tot slot is het makkelijker om poeder te doseren van ecstasypillen. Dit kan eventueel ook als advies worden gegeven. Dit is een sterk 'harm reduction' advies, en het kan zijn dat niet alle overheden en preventie-organisaties vinden dat dat binnen hun beleid past.
+
+<!--
+- Als mensen het een betere ervaring vinden, is hun intentie (natuurlijk) veel hoger. Maar, als ze er over nadenken, realiseren ze zich misschien dat de ervaring niet noodzakelijk beter is door die hogere dosis. Dit kan een ingang bieden (let wel: sommigen vinden die dingen, e.g. hallucineren, wel wenselijk).
+- Gelukkig gevoel wordt sterker tot de optimale dosis. Daarna neemt het in jezelf gekeerd zijn toe. (Voor de meeste mensen.) Mensen die een sterker gelukkig gevoel verwachten hebben een hogere intentie; dit kun je dus ontkrachten (voor de meeste mensen).
+- Mensen die denken dat een hoge dosis niet ongezonder is, hebben een hogere intentie; maar bijna iedereen snapt dat een hoge dosis ongezonder is. Dus hier kun je niet echt iets mee qua interventie.
+- Contact maken hangt positief samen
+
+- Bottom line 0: wat is een hoge dosering?
+
+- Bottom line 1: ontkrachten van onrealistische ideeen.
+
+- Bottom line 2: dosis in een pil zegt niets over al die dingen. Want het gewicht van een pil is zoveel groter dan dat van de MDMA dat er nog voldoende ruimte is voor vervuiling.
+
+-- Testen: 50% gelijk uitslag, dan kost het ook geen pil. Tijdens ADE 70%. En onmiddelijk uitslag dus.
+
+Grafiekjes met gevolgen: dus hoe de curves lopen. Dat kan ook een interventie zijn: mensen kunnen zelf de curve bepalen, en dat kun je dan vergelijken.
+
+- XTC is hetzelfde als MDMA in poedervorm; maar poedervorm is makkelijker te doseren. Als je een gram koopt, en in 10 porties doet, heb je 87 mg. Voor iemand van 50-75 mg is dat de optimale dosis als je effecten en schadelijkheid balanceert.
+
+- En geen glow-in-the-dark stoffen in XTC pillen heb je niet - fel fluoriserende stoffen ook niet.
+
+- Anticipated regret lijkt zinvol; er is een negatief verband tussen spijt en attitude/intentie.
+
+- Als mensen een hogere dosis gebruiken, onthouden ze minder. Als dat hun ervaring is, is hun intentie lager. Ze vinden het prettiger om meer te onthouden. Dit uitleggen kan dus effectief zijn.
+- 
+
+-->

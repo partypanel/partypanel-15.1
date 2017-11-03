@@ -1,6 +1,33 @@
-
 ```{r}
 
-frequencyVars <- c('goingOutFreq', 'substUseFreq', 'otherSubstFreq');
+### Variables using the 'special' frequency measurement question type
+frequencyVars <- c('goingOutFreq', 'substUsePastBeh', 'otherSubstancesFreq');
+
+### Variables to rename
+waveSpecificVarnameRegExPairs <- list(c('goingOutFreq_(.*)\\.0', "goingOutFreqPeriod_\\1"),
+                                      c('goingOutFreq_(.*)\\.1', "goingOutFreqNr_\\1_nr"),
+                                      c('substUsePastBeh_(.*)\\.0', "substUsePastBehPeriod_\\1"),
+                                      c('substUsePastBeh_(.*)\\.1', "substUsePastBehNr_\\1_nr"),
+                                      c('otherSubstancesFreq_(.*)\\.0', "otherSubstancesFreqPeriod_\\1"),
+                                      c('otherSubstancesFreq_(.*)\\.1', "otherSubstancesFreqNr_\\1_nr"));
+
+### Variables for which to check the class
+waveSpecificClassCheckRegexes <- list(c("goingOutFreqNr_(.*)_nr", "numeric"),
+                                      c("goingOutFreqPeriod_(.*)", "numeric"),
+                                      c("substUsePastBehNr_(.*)_nr", "numeric"),
+                                      c("substUsePastBehPeriod_(.*)", "numeric"),
+                                      c("otherSubstancesFreqNr_(.*)_nr", "numeric"),
+                                      c("otherSubstancesFreqPeriod_(.*)", "numeric"));
+
+### Statement about the random numbers that were assigned
+waveSpecificRandomNumberStatement <- "[[[CHECK THIS!!!!]]]] Participants received two random numbers, both between (and including) 1 and 4. [[[CHECK THIS!!!!]]]";
+
+### Overview of variables and how to visualise and analyse them
+### (regex, type, associations)
+waveSpecificVariableList <- list(awareOfTestFacilities = list(regex = "^testing_Awareness$",
+                                                              type = "dichotomous",
+                                                              showFreq = TRUE,
+                                                              assoc = NULL,
+                                                              caption = "Whether participants know that they can get XTC tested in the Netherlands"));
 
 ```

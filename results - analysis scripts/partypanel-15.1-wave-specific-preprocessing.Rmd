@@ -1,0 +1,84 @@
+
+```{r}
+
+###############################################################################
+### Create variables, do transformations, etc.
+###############################################################################
+
+### Create numeric variables holding number of visits to first aid
+# firstAidVisitVarsFull <- grep('visitedFirstAidFreq', names(dat), value=TRUE);
+# firstAidVisitVarsFreq <- grep('visitedFirstAidFreq.*comment', names(dat), value=TRUE);
+# firstAidVisitVarsVisited <- setdiff(firstAidVisitVarsFull, firstAidVisitVarsFreq);
+# firstAidVisitVarsFreqNumeric <- paste0(firstAidVisitVarsFreq, "_nr");
+# dat[, firstAidVisitVarsFreqNumeric] <- lapply(dat[, firstAidVisitVarsFreq], convertToNumeric);
+#
+# dat[, firstAidVisitVarsFreqNumeric] <- lapply(1:length(firstAidVisitVarsVisited),
+#                                               function (i) {
+#                                                 return(ifelse(dat[, firstAidVisitVarsVisited[i]]==0,
+#                                                               0,
+#                                                               as.numeric(dat[, firstAidVisitVarsFreqNumeric[i]])))});
+
+###############################################################################
+### Create variables, do transformations, etc.
+###############################################################################
+
+### Wave-specific data integrity checks (first element is a regex; second a condition)
+waveSpecificDataIntegrityChecks <- list(c('^goingOutFreq_[[:alnum:]]+$', '<200'));
+
+# ### Copy generic beliefs to a version for each behavior. We do this by
+# ### copying the variables starting with 'ep' to new variables with names
+# ### for the three behaviors ('epc', 'epw', 'epb')
+# varsToDuplicate <- grep('epAttValue_', names(dat), value=TRUE);
+# for (i in behaviors) {
+#   for (j in varsToDuplicate) {
+#     ### The new name, following the general algorithm
+#     newName <- paste0(i, "_", gsub('ep(.*)', '\\1', j));
+#     dat[, newName] <- dat[, j];
+#     ### Also copy the relevant labels
+#     labelDf[nrow(labelDf)+1, ] <-
+#       labelDf[labelDf$varNames.cln == j, ];
+#     ### And update the variable name
+#     labelDf[nrow(labelDf), 'varNames.cln'] <- newName;
+#   }
+# }
+# rm(newName);  ### Clean up
+
+###############################################################################
+### Specify determinant structures
+###############################################################################
+
+## Specify the determinant structure for each behavior
+detStruct <-
+  lapply(behaviors,
+         function(behavior) {
+   return(determinantStructure(behavior,
+                               list(behavior,
+                                    behaviorRegEx = behavior),
+                               determinantVar("intention",
+                                              "IntentionRAA",
+                                              determinantVar("attitude",
+                                                             "AttGeneral",
+                                                             subdeterminants("Likelihood",
+                                                                             "AttBeliefs"),
+                                                             subdeterminants("Evaluation",
+                                                                             "AttDesirable"),
+                                                             subdeterminantProducts("attProduct",
+                                                                                    c("AttBeliefs",
+                                                                                      "AttDesirable"))),
+                                              determinantVar("perceivedNorm",
+                                                             "NormGeneral",
+                                                             subdeterminants("Approval",
+                                                                             "NormBeliefs"),
+                                                             subdeterminants("Motivation to comply",
+                                                                             "NormMTC"),
+                                                             subdeterminantProducts("normProduct",
+                                                                                    c("NormBeliefs",
+                                                                                      "NormMTC"))),
+                                              determinantVar("pbc",
+                                                             "PBCgeneral",
+                                                             subdeterminants("Control beliefs",
+                                                                             "ContrBeliefs")))));
+ });
+
+
+```
