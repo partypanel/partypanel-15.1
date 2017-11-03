@@ -2,3 +2,20 @@
 .Rhistory
 .RData
 .Ruserdata
+
+### Exclude data - this can be downloaded from
+### https://partypanel.nl, once the embargo has
+### been lifted.
+*.csv
+
+### Reports
+*.html
+
+### Survey etc
+*.lss
+*.pdf
+
+### Plots & images
+*.png
+*.svg
+*.pdf
