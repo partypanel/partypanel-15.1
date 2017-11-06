@@ -1,5 +1,5 @@
 
-```{r}
+```{r specific-wave-specific-analyses-1}
 
 doseVars <- c('strngXTC_Definition', 'xtcUseDoseHigh',
               'xtcUseDosePref', 'myPillDose',

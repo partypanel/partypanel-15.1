@@ -8,6 +8,7 @@ startDate <- '2015-07-01';
 categoricalQuestions <- c('informedConsent', 'gender', 'hasJob',
                           'currentEducation', 'prevEducation', 'country');
 behaviors <- c('highDose', 'strngXTC', 'testing');
+
 options(ufs.debug = FALSE);
 
 ########################################################################
@@ -17,6 +18,8 @@ basePath <- file.path(rootPath, paste0("partypanel-", waveNumber));
 sharedPath <- file.path(rootPath, "partypanel-shared");
 outputPath <- file.path(basePath, 'results - reports');
 scriptPath <- file.path(basePath, 'results - analysis scripts');
+
+loginStringFilePath <- file.path(sharedPath, 'report-upload-login-string.txt')
 
 require('rmarkdown');
 
@@ -39,6 +42,8 @@ render(input=file.path(sharedPath, 'party-panel-report.Rmd'),
 ### Uploading report
 ########################################################################
 
+uploadPassword <- readLines(loginStringFilePath);
+
 if (require('RCurl')) {
   if (url.exists('partypanel.nl')) {
     ftpUpload(file.path(rootPath,
@@ -46,7 +51,7 @@ if (require('RCurl')) {
                         "results - reports",
                         paste0("party panel ", waveNumber, " report.html")),
               paste0("ftp://partypanel.nl/", waveNumber, "/index.html"),
-              userpwd="ppreports@partypanel.nl:ppreports_Password@2015");
+              userpwd=uploadPassword)
     cat("Uploaded report for wave ", waveNumber, " using FTP.\n", sep="");
   }
 }
