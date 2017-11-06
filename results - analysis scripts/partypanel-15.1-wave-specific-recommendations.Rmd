@@ -1,3 +1,11 @@
+
+```{r paths, echo=FALSE, results="asis" }
+
+ppRound <- '15.1';
+ppBehaviors <- 'hooggedoseerde ecstasy gebruiken, een hoge dosis MDMA gebruiken, en ecstasy laten testen';
+
+```
+
 ### Inleiding
 
 Dit rapport is een product van Party Panel. Party Panel is een wetenschappelijke semi-panel studie die tot doel heeft preventie van gezondheidsincidenten in het Nederlandse uitgaansleven te informeren.
