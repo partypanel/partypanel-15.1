@@ -1,6 +1,9 @@
 
 ```{r}
 
+### Note that this file is run after the wave-specific preparation, so anything
+### specified there can be used here.
+
 ###############################################################################
 ### Create variables, do transformations, etc.
 ###############################################################################

@@ -1,0 +1,22 @@
+
+```{r wave-specific-determinant-structures-included-file}
+
+  cat("\n\n");
+  pandoc.header(detStruct[[1]]$name, level=4);
+  cat("\n\n");
+
+  data.tree:::plot.Node(detStruct[[1]])
+
+  cat("\n\n");
+  pandoc.header(detStruct[[2]]$name, level=4);
+  cat("\n\n");
+
+  data.tree:::plot.Node(detStruct[[2]])
+
+  cat("\n\n");
+  pandoc.header(detStruct[[3]]$name, level=4);
+  cat("\n\n");
+
+  data.tree:::plot.Node(detStruct[[3]])
+
+```

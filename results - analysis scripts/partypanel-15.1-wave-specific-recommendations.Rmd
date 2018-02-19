@@ -6,7 +6,7 @@ ppBehaviors <- 'hooggedoseerde ecstasy gebruiken, een hoge dosis MDMA gebruiken,
 
 ```
 
-### Inleiding
+<!--- ### Inleiding
 
 Dit rapport is een product van Party Panel. Party Panel is een wetenschappelijke semi-panel studie die tot doel heeft preventie van gezondheidsincidenten in het Nederlandse uitgaansleven te informeren.
 
@@ -21,10 +21,11 @@ Een noodzakelijke (maar niet voldoende) voorwaarde succesvolle preventie is inzi
 Tot slot is het belangrijk om een breed gedragen misverstand over gedragsverandering even expliciet te behandelen. Kennis en bewustwording zijn meestal relatief onbelangrijke determinanten van gedrag. Interventies (of boodschappen/communicaties) die zich alleen richten op bewustwording en kennis hebben weinig kans van slagen. Kennis en bewustwording zijn vaak wel belangrijk voor gedragsverandering; alleen zijn er vaak al veel communicaties die zich daar op richten, en zijn ze praktisch nooit voldoende. Een bijzondere rol wordt ingenomen door risicoperceptie, de inschatting van het risico dat riskant gedrag met zich meebrengt. Niet alleen is dit als vorm van kennis vaak relatief onbelangrijk (in vergelijking met andere determinanten zoals vaardigheden): risicoperceptie is bovendien een riskant interventiedoel. Dit omdat zogenaamde 'dreigende communicatie' een averechts effect kan hebben, en communicatie over de risico's waar iemand aan wordt blootgesteld is vaak dreigend voor de ontvanger.
 
 Succesvolle preventie in het uitgaansleven vereist dus onherroepelijk dat van de betreffende gedragingen in kaart wordt gebracht wat de belangrijkste determinanten zijn. In dit rapport wordt dit besproken voor Party Panel ronde `r ppRound` en de gedragingen `r ppBehaviors`.
+-->
 
-### Interventie suggesties
+#### Interventie suggesties
 
-Deze sectie bevat de suggesties voor preventie op basis van de analyse van de determinanten van `r ppBehaviors`.
+Deze sectie bevat de suggesties voor preventie op basis van de analyse van de determinanten van hooggedoseerde ecstasy gebruiken, een hoge dosis MDMA gebruiken, en ecstasy laten testen.
 
 Het valt op dat de meest frequent gerapporteerde effecten van het gebruiken van een hoge dosis MDMA over het algemeen niet de meest wenselijke effecten zijn. Deelnemers aan Party Panel realiseerden zich dus ergens wel dat het gebruik van een hoge dosis onwenselijke gevolgen had (met betrekking tot de ervaring; het werd duidelijk dat deelnemers zich al realiseerden dat hoge doses gevolgen voor de gezondheid heeft).
 

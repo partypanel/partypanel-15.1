@@ -14,17 +14,26 @@ bp <- ggplot(tmpDat, aes(y=xtcUseDosePref, x=myPillDose)) +
                      breaks=seq(0, 300, 50)) +
   scale_y_continuous(limits=c(0, 600),
                      breaks=seq(0, 600, 100)) +
-  xlab("How strong are your pills?") +
-  ylab("What pill dose would you prefer?") +
-  ggtitle("Own pill dose versus preferred pill dose");
+  # xlab("How strong are your pills?") +
+  # ylab("What pill dose would you prefer?") +
+  # ggtitle("Own pill dose versus preferred pill dose") +
+  xlab("Hoe sterk zijn je pillen?") +
+  ylab("Welke pilsterkte wil je?") +
+  ggtitle("Eigen versus voorkeursdosis") +
+  theme(legend.position="none",
+                   text=element_text(size=26),
+                   plot.background = element_rect(fill = "transparent",
+                                                  color = NA));
 
 ggSave(plot=bp,
+       width=8, height=8,
        file.path(workingPath, "Own pills versus preferred dose (1-empty).png"));
 
 bp <- bp + geom_jitter(size=4, width=10, height=10,
                  alpha=.15, na.rm=TRUE);
 
 ggSave(plot = bp,
+       width=8, height=8,
        file.path(workingPath, "Own pills versus preferred dose (2-filled).png"));
 
 bp <- ggplot(tmpDat, aes(y=strngXTC_Definition, x=myPillDose)) +
@@ -33,12 +42,20 @@ bp <- ggplot(tmpDat, aes(y=strngXTC_Definition, x=myPillDose)) +
                      breaks=seq(0, 300, 50)) +
   scale_y_continuous(limits=c(0, 300),
                      breaks=seq(0, 300, 50)) +
-  xlab("How strong are your pills?") +
-  ylab("When do you consider a pill 'highly dosed'?") +
-  ggtitle("Own pill dose vs definition of 'high dose'") +
-  geom_abline(intercept=0, slope=1, color='blue', size=2);
+  # xlab("How strong are your pills?") +
+  # ylab("When do you consider a pill 'highly dosed'?") +
+  # ggtitle("Own pill dose vs definition of 'high dose'") +
+  xlab("Hoe sterk zijn je pillen?") +
+  ylab("Wat vind je hoog gedoseerde pillen?") +
+  ggtitle("Eigen versus hoge dosis") +
+  geom_abline(intercept=0, slope=1, color='blue', size=2) +
+  theme(legend.position="none",
+                   text=element_text(size=26),
+                   plot.background = element_rect(fill = "transparent",
+                                                  color = NA));
 
 ggSave(plot=bp,
+       width=8, height=8,
        file.path(workingPath, "Own pills versus definition of high dose (1-empty).png"));
 
 bp <- bp +
@@ -46,6 +63,7 @@ bp <- bp +
               alpha=.15, na.rm=TRUE);
 
 ggSave(plot = bp,
+       width=8, height=8,
        file.path(workingPath, "Own pills versus definition of high dose (2-filled).png"));
 
 rm(bp);
@@ -55,7 +73,9 @@ rm(tmpDat);
 ### Weight and dose
 ########################################################################
 
-regr(xtcUseDosePref ~ weight_other, dat);
+pandoc.header("", level=5);
+
+pander(regr(xtcUseDosePref ~ weight_other, dat));
 
 tmpDat <- na.omit(dat[, c("weight_other", "xtcUseDosePref", "highDose_Tolerance_tolerance")]);
 tmpDat$healthyDoseLo <- tmpDat$weight_other;
@@ -63,17 +83,21 @@ tmpDat$healthyDoseHi <- tmpDat$weight_other * 1.5;
 
 weightDosePlotBase <-
   ggplot(tmpDat, aes(x=weight_other, y=xtcUseDosePref)) +
-  xlab("Gewicht (in kilo's)") +
   xlab("Weight (in kilograms)") +
-  ylab("Gewenste dosis (in milligram MDMA)") +
+  xlab("Gewicht (in kilo's)") +
   ylab("Desired dose (in milligram MDMA)") +
-  ggtitle("Verband tussen gewicht en gewenste dosis MDMA") +
+  ylab("Gewenste dosis (in mg MDMA)") +
   ggtitle("Association between weight and desired dose") +
+  ggtitle("Gewicht en gewenste dosis MDMA") +
   coord_cartesian(xlim=c(min(tmpDat$weight_other, na.rm=TRUE),
                          max(tmpDat$weight_other, na.rm=TRUE)),
                   ylim=c(0,
                          max(tmpDat$xtcUseDosePref, na.rm=TRUE))) +
-  theme_bw();
+  theme_bw() +
+  theme(legend.position="none",
+                   text=element_text(size=26),
+                   plot.background = element_rect(fill = "transparent",
+                                                  color = NA))
 
 weightDosePlotRecommended <- weightDosePlotBase +
   geom_ribbon(aes(ymin=healthyDoseLo, ymax=healthyDoseHi), fill='green', alpha=.2) +
@@ -103,11 +127,33 @@ weightDosePlotFull <- weightDosePlotScatter +
 weightDosePlotFullTolerance <- weightDosePlotScatterTolerance +
   stat_smooth(method='lm', fill="blue", alpha=.2);
 
-ggSave(file.path(workingPath, "Weight & dose 1 [empty].png"), weightDosePlotBase);
-ggSave(file.path(workingPath, "Weight & dose 2 [guidelines].png"), weightDosePlotRecommended);
-ggSave(file.path(workingPath, "Weight & dose 3 [scatter].png"), weightDosePlotScatter);
-ggSave(file.path(workingPath, "Weight & dose 4 [regression].png"), weightDosePlotFull);
-ggSave(file.path(workingPath, "Weight & dose 5 [scatter+tolerance].png"), weightDosePlotScatterTolerance);
-ggSave(file.path(workingPath, "Weight & dose 6 [regression+tolerance].png"), weightDosePlotFullTolerance);
+ggSave(file.path(workingPath, "Weight & dose 1 [empty].png"), weightDosePlotBase, width=8, height=8);
+ggSave(file.path(workingPath, "Weight & dose 2 [guidelines].png"), weightDosePlotRecommended, width=8, height=8);
+ggSave(file.path(workingPath, "Weight & dose 3 [scatter].png"), weightDosePlotScatter, width=8, height=8);
+ggSave(file.path(workingPath, "Weight & dose 4 [regression].png"), weightDosePlotFull, width=8, height=8);
+ggSave(file.path(workingPath, "Weight & dose 5 [scatter+tolerance].png"), weightDosePlotScatterTolerance, width=8, height=8);
+ggSave(file.path(workingPath, "Weight & dose 6 [regression+tolerance].png"), weightDosePlotFullTolerance, width=8, height=8);
 
 ```
+
+
+```{r specific-wave-specific-analyses-2}
+
+singleQuestionEasyBar('highDose_AttBeliefs_isolated',
+                      niceHeader = "Verwachting dat hoge dosis isoleert");
+
+singleQuestionEasyBar('highDose_AttDesirable_isolated',
+                      niceHeader = "Wenselijk van meer isolatie");
+
+singleQuestionEasyBar('highDose_AttBeliefs_memory');
+
+singleQuestionEasyBar('highDose_AttDesirable_memory');
+
+singleQuestionEasyBar('highDose_AttBeliefs_intensity');
+
+singleQuestionEasyBar('highDose_AttDesirable_intens');
+
+singleQuestionEasyBar('highDose_AttBeliefs_health');
+
+```
+
