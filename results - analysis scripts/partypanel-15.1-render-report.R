@@ -3,7 +3,7 @@
 ########################################################################
 waveNumber <- "15.1";
 surveyId <- 652829;
-startDate <- '2015-07-01';
+startDate <- '2015-06-28';
 categoricalQuestions <- c('informedConsent', 'gender', 'hasJob',
                           'currentEducation', 'prevEducation', 'country');
 behaviors <- c('highDose', 'strngXTC', 'testing');
@@ -28,8 +28,10 @@ sharedPath <- file.path(rootPath, "partypanel-shared");
 outputPath <- file.path(basePath, 'results - reports');
 scriptPath <- file.path(basePath, 'results - analysis scripts');
 
-loginStringFilePath <- file.path(sharedPath,
-                                 'report-upload-login-string.txt')
+reportLoginStringFilePath <-
+  file.path(sharedPath, 'report-upload-login-string.txt')
+resultsLoginStringFilePath <-
+  file.path(sharedPath, 'results-upload-login-string.txt')
 
 ########################################################################
 ### Rendering command
@@ -41,6 +43,7 @@ render(input=file.path(sharedPath, 'party-panel-report.Rmd'),
                                                'report.html')),
        params=list(waveNumber=waveNumber,
                    basePath=basePath,
+                   sharedPath=sharedPath,
                    surveyId=surveyId,
                    startDate=startDate,
                    behaviors=behaviors,
@@ -60,10 +63,10 @@ if (exists('ppRecrInfo')) {
 }
 
 ########################################################################
-### Uploading report
+### Uploading report to secure site
 ########################################################################
 
-uploadPassword <- readLines(loginStringFilePath);
+uploadPassword <- readLines(reportLoginStringFilePath);
 
 if (require('RCurl')) {
   if (url.exists('partypanel.nl')) {
@@ -73,6 +76,24 @@ if (require('RCurl')) {
                         paste0("party panel ", waveNumber, " report.html")),
               paste0("ftp://partypanel.nl/", waveNumber, "/index.html"),
               userpwd=uploadPassword)
-    cat("Uploaded report for wave ", waveNumber, " using FTP.\n", sep="");
+    cat("Uploaded report for wave ", waveNumber, " to the secured site using FTP.\n", sep="");
+  }
+}
+
+########################################################################
+### Uploading report for publication (only uncomment after embargo)
+########################################################################
+
+uploadPassword <- readLines(resultsLoginStringFilePath);
+
+if (require('RCurl')) {
+  if (url.exists('partypanel.nl')) {
+    ftpUpload(file.path(rootPath,
+                        paste0("partypanel-", waveNumber),
+                        "results - reports",
+                        paste0("party panel ", waveNumber, " report.html")),
+              paste0("ftp://partypanel.nl/", waveNumber, "/report.html"),
+              userpwd=uploadPassword)
+    cat("Uploaded report for wave ", waveNumber, " to the public site using FTP.\n", sep="");
   }
 }

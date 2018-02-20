@@ -3,19 +3,31 @@
 .RData
 .Ruserdata
 
-### Exclude data - this can be downloaded from
-### https://partypanel.nl, once the embargo has
-### been lifted.
-*.csv
+########################################################################
+########################################################################
+###
+###   EXCLUSIONS DURING EMBARGO PERIOD
+###
+###   (These files won't be synched with the GitHub repository, and
+###    therefore, the Open Science Framework. Once the embargo is
+###    lifted, these exclusions can be commented out to publish these
+###    resources.)
+###
+########################################################################
+########################################################################
+
+### Data
+#*.csv
 
 ### Reports
-*.html
+#*.html
 
 ### Survey etc
-*.lss
-*.pdf
+#*.lss
+#*.pdf
 
 ### Plots & images
-*.png
-*.svg
-*.pdf
+#*.png
+#*.svg
+#*.pdf
+
