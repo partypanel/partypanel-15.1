@@ -55,4 +55,8 @@ waveSpecificConfidentiality <-
 ### Statement about the random numbers that were assigned
 waveSpecificRandomNumberStatement <- "For each participant, two random numbers were set. The first was set to a value of 1, 2 or 3, and determined for which behavior determinants would be measured (participants were also provided with the opportunity to answer questions about the other behaviors, if they wanted). The second was set to an integer number between (and including) 0 and 10. This second number was used to explore how participants would respond if testing would be available in the whole of the Netherlands for different costs (i.e. 0 to 10 euros).";
 
+### Specific thank-yous for people
+waveSpecificThankYous <- "For this wave specifically, we would like to thank Ferry Goossens for thinking along with the questionnaire.";
+
+
 ```
