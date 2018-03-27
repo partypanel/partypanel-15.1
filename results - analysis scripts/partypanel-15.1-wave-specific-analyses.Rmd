@@ -137,23 +137,42 @@ ggSave(file.path(workingPath, "Weight & dose 6 [regression+tolerance].png"), wei
 ```
 
 
-```{r specific-wave-specific-analyses-2}
+```{r specific-wave-specific-analyses-2, results='asis'}
 
 singleQuestionEasyBar('highDose_AttBeliefs_isolated',
-                      niceHeader = "Verwachting dat hoge dosis isoleert");
+                      niceHeader = "De verwachting dat een hoge dosis leidt tot sociale isolatie");
+cat("\n\nFrequencies and percentages in text:\n\n");
+pander(freq(dat$highDose_AttBeliefs_isolated));
 
 singleQuestionEasyBar('highDose_AttDesirable_isolated',
-                      niceHeader = "Wenselijk van meer isolatie");
+                      niceHeader = "Wenselijkheid van meer sociale isolatie");
+cat("\n\nFrequencies and percentages in text:\n\n");
+pander(freq(dat$highDose_AttDesirable_isolated));
 
-singleQuestionEasyBar('highDose_AttBeliefs_memory');
+singleQuestionEasyBar('highDose_AttBeliefs_memory',
+                      niceHeader = "Verwachting dat een hoge dosis invloed heeft op je geheugen");
+cat("\n\nFrequencies and percentages in text:\n\n");
+pander(freq(dat$highDose_AttBeliefs_memory));
 
-singleQuestionEasyBar('highDose_AttDesirable_memory');
+singleQuestionEasyBar('highDose_AttDesirable_memory',
+                      niceHeader = "Wenselijkheid van je meer herinneren");
+cat("\n\nFrequencies and percentages in text:\n\n");
+pander(freq(dat$highDose_AttDesirable_memory));
 
-singleQuestionEasyBar('highDose_AttBeliefs_intensity');
+singleQuestionEasyBar('highDose_AttBeliefs_intensity',
+                      niceHeader = "Verwachting dat de trip intenser is bij een hoge dosiss");
+cat("\n\nFrequencies and percentages in text:\n\n");
+pander(freq(dat$highDose_AttBeliefs_intensity));
 
-singleQuestionEasyBar('highDose_AttDesirable_intens');
+singleQuestionEasyBar('highDose_AttDesirable_intens',
+                      niceHeader = "Wenselijkheid van een intense trip");
+cat("\n\nFrequencies and percentages in text:\n\n");
+pander(freq(dat$highDose_AttDesirable_intens));
 
-singleQuestionEasyBar('highDose_AttBeliefs_health');
+singleQuestionEasyBar('highDose_AttBeliefs_health',
+                      niceHeader = "Verwachting dat een hoge dosis tot meer gezondheidsschade leidt");
+cat("\n\nFrequencies and percentages in text:\n\n");
+pander(freq(dat$highDose_AttBeliefs_health));
 
 ```
 
