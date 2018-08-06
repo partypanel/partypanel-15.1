@@ -15,6 +15,11 @@ waveSpecificVarnameRegExPairs <- list(c('goingOutFreq_(.*)\\.0', "goingOutFreqPe
                                       c('otherSubstancesFreq_(.*)\\.0', "otherSubstancesFreqPeriod_\\1"),
                                       c('otherSubstancesFreq_(.*)\\.1', "otherSubstancesFreqNr_\\1_nr"));
 
+### Bidimensional scales (and how much to subtract to correct)
+waveSpecificBidimensionalScales <- list(c("AttBeliefs_", -4),
+                                        c("AttDesirable_", -4),
+                                        c("NormMTC_", -4));
+
 ### Variables for which to check the class
 waveSpecificClassCheckRegexes <- list(c("goingOutFreqNr_(.*)_nr", "numeric"),
                                       c("goingOutFreqPeriod_(.*)", "numeric"),
@@ -29,7 +34,28 @@ waveSpecificVariableList <- list(awareOfTestFacilities = list(regex = "^testing_
                                                               type = "dichotomous",
                                                               showFreq = TRUE,
                                                               assoc = NULL,
-                                                              caption = "Whether participants know that they can get XTC tested in the Netherlands"));
+                                                              caption = "Whether participants know that they can get XTC tested in the Netherlands"),
+                                 xtcDoseStrategy = list(regex = "^xtcDoseStrategy(?!_other).*$",
+                                                        type="array",
+                                                        showFreq=TRUE,
+                                                        showBarPlot=TRUE,
+                                                        showPropPlot=TRUE,
+                                                        caption="Strategies people use to determine the strength of their pills"),
+                                 testingTrustworthy = list(regex = "^testing_Trustworthy_.*$",
+                                                           type="array",
+                                                           showFreq=TRUE,
+                                                           showDiamondPlot=TRUE,
+                                                           showBarPlot=TRUE,
+                                                           showRidgelinePlot=TRUE,
+                                                           plotWidthMultiplier=1.3,
+                                                           assoc=NULL,
+                                                           caption="How trustworthy people consider different sources of information about their pill content/strength"),
+                                 doseControlBeliefs = list(regex = "^doseControlBeliefs.*$",
+                                                           type="array",
+                                                           showDiamondPlot=TRUE,
+                                                           showBarPlot=TRUE,
+                                                           assoc=NULL,
+                                                           caption="Beliefs people have about the control over their dose"));
 
 ########################################################################
 ### Text fragments

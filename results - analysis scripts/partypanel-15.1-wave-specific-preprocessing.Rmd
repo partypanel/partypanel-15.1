@@ -47,6 +47,21 @@ waveSpecificDataIntegrityChecks <- list(c('^goingOutFreq_[[:alnum:]]+$', '<200')
 # rm(newName);  ### Clean up
 
 ###############################################################################
+### Specify scales (aggregates) to compute. Note that scales that are included
+### in the determinant structures should be left out because they will be
+### processed in the determinant structure.
+### Each element can be either 
+###############################################################################
+
+waveSpecificScales <- NULL;
+
+### Until makeScales has been updated to accept regular expressions,
+### collect variable names here
+# waveSpecificScales <- lapply(waveSpecificScales, function(rgx) {
+#   return(grep(rgx, names(dat), value=TRUE));
+# });
+
+###############################################################################
 ### Specify determinant structures
 ###############################################################################
 

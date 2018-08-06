@@ -176,3 +176,11 @@ pander(freq(dat$highDose_AttBeliefs_health));
 
 ```
 
+```{r specific-wave-specific-analyses-3, results='asis'}
+
+  ### Diamondplot where the colors of the dots reflect another variable
+  #meansDiamondPlot(dat, items='highDose_AttBeliefs_isolated') +
+  # And then color based on dat$highDose_AttDesirable_isolated
+
+```
+
