@@ -26,7 +26,13 @@
 ###############################################################################
 
 ### Wave-specific data integrity checks (first element is a regex; second a condition)
-waveSpecificDataIntegrityChecks <- list(c('^goingOutFreq_[[:alnum:]]+$', '<200'));
+waveSpecificDataIntegrityChecks <-
+  list(c('^\\w+Freq_[^_]+(?<!comment)$', '<200'),
+       c('^substUsePastBeh_[^_]+(?<!comment)$', '<200')); ### Match all frequency variables
+  
+  # list(c('^goingOutFreq_[[:alnum:]]+$', '<200'),
+  #      c('^substUsePastBeh_[[:alnum:]]+$', '<200'),
+  #      c('^otherSubstFreq_[[:alnum:]]+$', '<200'));
 
 # ### Copy generic beliefs to a version for each behavior. We do this by
 # ### copying the variables starting with 'ep' to new variables with names
